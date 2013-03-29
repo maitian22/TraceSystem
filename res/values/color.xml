@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<item type="color" name="white">#FFFFFF</item>
+	<item type="color" name="red">#ff0000</item>
+	<!-- <item type="color" name="black">#000000</item> -->
+	<item type="color" name="black">#3e3e3e</item>
+	<item type="color" name="orangeyellow">#FF8247</item>
+	<item type="color" name="gay1">#B0B0B0</item>
+	<item type="color" name="blue">#87CEEB</item>
+	<item type="color" name="lightyellow">#FFB90F</item>
+	<item type="color" name="bgcolor">#fffbea</item>
+	<item type="color" name="nulls">#00ffffff</item>
+	<item type="color" name="lightblack">#3e3e3e</item>
+	<item type="color" name="colorhese">#995212</item>
+	<item type="color" name="splitline">#cde0f5</item>
+	<item type="color" name="bjcld">#cde0f5</item>
+</resources>
