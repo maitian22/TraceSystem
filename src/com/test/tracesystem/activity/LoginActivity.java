@@ -1,18 +1,22 @@
 package com.test.tracesystem.activity;
 
-
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -46,6 +50,17 @@ public class LoginActivity extends Activity {
 	private View mLoginFormView;
 	private View mLoginStatusView;
 	private TextView mLoginStatusMessageView;
+	private CheckBox mRembPassw;
+	private SharedPreferences mShareP;
+
+	OnCheckedChangeListener mCheckListen = new OnCheckedChangeListener() {
+		@Override
+		public void onCheckedChanged(CompoundButton buttonView,
+				boolean isChecked) {
+			// TODO Auto-generated method stub
+
+		}
+	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +68,14 @@ public class LoginActivity extends Activity {
 
 		setContentView(R.layout.activity_login);
 
+		mRembPassw = (CheckBox) findViewById(R.id.remember_password);
+		mRembPassw.setOnCheckedChangeListener(mCheckListen);
+		
 		// Set up the login form.
-		mEmail = getIntent().getStringExtra(EXTRA_EMAIL);
+		// mEmail = getIntent().getStringExtra(EXTRA_EMAIL);
+		mShareP = PreferenceManager.getDefaultSharedPreferences(this);
+		mEmail = mShareP.getString("Email", "foo@example.com");
+
 		mEmailView = (EditText) findViewById(R.id.email);
 		mEmailView.setText(mEmail);
 
@@ -72,6 +93,12 @@ public class LoginActivity extends Activity {
 					}
 				});
 
+		if (mRembPassw.isChecked()) {
+
+		} else {
+
+		}
+		
 		mLoginFormView = findViewById(R.id.login_form);
 		mLoginStatusView = findViewById(R.id.login_status);
 		mLoginStatusMessageView = (TextView) findViewById(R.id.login_status_message);

@@ -38,34 +38,35 @@ public final class R {
         public static final int title_button_2=0x7f020007;
     }
     public static final class id {
-        public static final int HorizontalScrollView01=0x7f070019;
-        public static final int ListView01=0x7f07001a;
-        public static final int addlinear_view=0x7f070010;
-        public static final int button_view=0x7f070011;
-        public static final int cancel_btn=0x7f070012;
-        public static final int del_button=0x7f070018;
+        public static final int HorizontalScrollView01=0x7f07001a;
+        public static final int ListView01=0x7f07001b;
+        public static final int addlinear_view=0x7f070011;
+        public static final int button_view=0x7f070012;
+        public static final int cancel_btn=0x7f070013;
+        public static final int del_button=0x7f070019;
         public static final int email=0x7f070003;
-        public static final int ensure_btn=0x7f070013;
-        public static final int item_edit=0x7f070014;
-        public static final int item_text=0x7f070015;
-        public static final int list=0x7f070016;
+        public static final int ensure_btn=0x7f070014;
+        public static final int item_edit=0x7f070015;
+        public static final int item_text=0x7f070016;
+        public static final int list=0x7f070017;
         public static final int login=0x7f070005;
         public static final int login_form=0x7f070002;
         public static final int login_status=0x7f070000;
         public static final int login_status_message=0x7f070001;
-        public static final int menu_forgot_password=0x7f07001b;
+        public static final int menu_forgot_password=0x7f07001c;
         public static final int password=0x7f070004;
-        public static final int scroll_view=0x7f07000a;
-        public static final int sign_in_button=0x7f070006;
-        public static final int table_exist_btn=0x7f07000f;
-        public static final int table_title_edit=0x7f07000e;
-        public static final int table_title_view=0x7f07000d;
-        public static final int title2_text=0x7f07000c;
-        public static final int title_button=0x7f070017;
-        public static final int title_text=0x7f07000b;
-        public static final int title_view=0x7f070007;
-        public static final int view_left=0x7f070008;
-        public static final int view_right=0x7f070009;
+        public static final int remember_password=0x7f070006;
+        public static final int scroll_view=0x7f07000b;
+        public static final int sign_in_button=0x7f070007;
+        public static final int table_exist_btn=0x7f070010;
+        public static final int table_title_edit=0x7f07000f;
+        public static final int table_title_view=0x7f07000e;
+        public static final int title2_text=0x7f07000d;
+        public static final int title_button=0x7f070018;
+        public static final int title_text=0x7f07000c;
+        public static final int title_view=0x7f070008;
+        public static final int view_left=0x7f070009;
+        public static final int view_right=0x7f07000a;
     }
     public static final class layout {
         public static final int activity_login=0x7f030000;
