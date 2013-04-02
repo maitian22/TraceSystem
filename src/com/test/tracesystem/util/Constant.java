@@ -30,7 +30,7 @@ public class Constant {
 		{"产品发货管理","产品退货管理","产品召回管理","不合格产品处理"},
 		{"物料入库统计","物料存货总览","产品出库统计","产品库存总览"},
 		{"物料检测模板","产品基础信息","检测指标管理","产品检测模板","客户资料管理","供应商资料管理","国家标准文件"},
-		{"学习计划"}
+		{"学习计划","消费者查询"}
 		};
 	
 	public static String[][] parentTableName={
@@ -40,7 +40,7 @@ public class Constant {
 		{"product_delivery_management","product_return_management","product_recall_management","product_unqualified_process"},
 		{"material_storage_statistics","meterial_inventory","products_statistics","product_inventory"},
 		{"material_detection_template","product_information","detection_target_management","product_detection_template","customer_information_management","supplier_information_management","national_standard_file"},
-		{"learning_plan"}
+		{"learning_plan","consumer_inquiries"}  
 	};
 	
 	/***

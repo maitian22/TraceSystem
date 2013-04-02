@@ -11,10 +11,12 @@ import android.os.Message;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.aliyun.android.oss.OSSClient;
+import com.test.tracesystem.activity.CustomInquery;
 import com.test.tracesystem.activity.LeftMenuActivity;
 import com.test.tracesystem.activity.RightChildActivity;
 import com.test.tracesystem.util.Constant;
@@ -32,7 +34,13 @@ public class MainActivity extends ActivityGroup {
 			super.handleMessage(msg);
 			if (msg.what == Constant.FLAG_START_ACTIVITY) {
 				right_view.removeAllViews();
-
+				Class<?> rightClass;
+				if(msg.arg1 == Constant.parentMenu.length && msg.arg2 == 1){
+					//choose custom inquery option
+					rightClass = CustomInquery.class;
+				}else{
+					rightClass = RightChildActivity.class;
+				}
 				String name = Constant.childMenu[msg.arg1][msg.arg2];
 				String tableName = Constant.parentTableName[msg.arg1][msg.arg2];
 				Intent intent = new Intent(context, RightChildActivity.class);
@@ -82,6 +90,7 @@ public class MainActivity extends ActivityGroup {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE); 
 		setContentView(R.layout.activity_main);
 		context = this;
 		activityManager = getLocalActivityManager();

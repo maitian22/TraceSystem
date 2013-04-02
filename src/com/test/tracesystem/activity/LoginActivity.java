@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -20,6 +21,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.test.tracesystem.MainActivity;
 import com.test.tracesystem.R;
 
 public class LoginActivity extends Activity {
@@ -58,7 +60,8 @@ public class LoginActivity extends Activity {
 		public void onCheckedChanged(CompoundButton buttonView,
 				boolean isChecked) {
 			// TODO Auto-generated method stub
-
+			if(!isChecked)
+				mShareP.edit().putString("Password", "").commit();
 		}
 	};
 
@@ -75,9 +78,13 @@ public class LoginActivity extends Activity {
 		// mEmail = getIntent().getStringExtra(EXTRA_EMAIL);
 		mShareP = PreferenceManager.getDefaultSharedPreferences(this);
 		mEmail = mShareP.getString("Email", "foo@example.com");
+		mPassword = mShareP.getString("Password", "");
 
 		mEmailView = (EditText) findViewById(R.id.email);
 		mEmailView.setText(mEmail);
+		
+		mEmailView.setSelection(mEmail.length());
+		
 
 		mPasswordView = (EditText) findViewById(R.id.password);
 		mPasswordView
@@ -92,11 +99,9 @@ public class LoginActivity extends Activity {
 						return false;
 					}
 				});
-
+		
 		if (mRembPassw.isChecked()) {
-
-		} else {
-
+			mPasswordView.setText(mPassword);
 		}
 		
 		mLoginFormView = findViewById(R.id.login_form);
@@ -107,6 +112,11 @@ public class LoginActivity extends Activity {
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
+						
+						mShareP.edit().putString("Email", mEmail).commit();
+						if(mRembPassw.isChecked())
+							mShareP.edit().putString("Password", mPassword).commit();
+						
 						attemptLogin();
 					}
 				});
@@ -252,6 +262,8 @@ public class LoginActivity extends Activity {
 
 			if (success) {
 				finish();
+				Intent i = new Intent(LoginActivity.this,MainActivity.class);
+				startActivity(i);
 			} else {
 				mPasswordView
 						.setError(getString(R.string.error_incorrect_password));

@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.test.tracesystem.R;
 import com.test.tracesystem.SystemAppcation;
 import com.test.tracesystem.util.Constant;
+import com.test.tracesystem.util.LogUtil;
 import com.test.tracesystem.util.ToastUtil;
 
 public class LeftMenuActivity extends Activity {
@@ -64,6 +65,7 @@ public class LeftMenuActivity extends Activity {
 				// TODO Auto-generated method stub
 				
 				ToastUtil.i(context, childString[groupPosition][childPosition]);
+				LogUtil.out("aa", "groupPosition:"+groupPosition+"childPosition:"+childPosition);
 				String tableName=Constant.parentTableName[groupPosition][childPosition];
 				
 				Message msg=new Message();
