@@ -10,6 +10,16 @@
         android:background="@drawable/box_1"
         android:padding="8dp" >
 
+        <!--Button
+            android:id="@+id/modify_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/title_button"
+            android:padding="10dp"
+            android:text="修改表单"
+            android:textSize="16dp" >
+        </Button-->
+
         <TextView
             android:id="@+id/title_text"
             android:layout_width="wrap_content"
@@ -17,7 +27,8 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
             android:textColor="@color/black"
-            android:textSize="20dp" >
+            android:textSize="20dp"
+            android:visibility="gone">
         </TextView>
 
         <RelativeLayout
@@ -27,24 +38,24 @@
             android:layout_marginRight="20dp" >
 
             <Button
-                android:id="@+id/title_button"
+                android:id="@+id/del_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/title_button"
                 android:padding="10dp"
-                android:text="添加数据"
+                android:text="删除表单"
                 android:textSize="16dp" >
             </Button>
 
             <Button
-                android:id="@+id/del_button"
+                android:id="@+id/title_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/title_button"
+                android:layout_toRightOf="@id/del_button"
                 android:background="@drawable/title_button"
                 android:padding="10dp"
-                android:text="删除表单"
+                android:text="添加数据"
                 android:textSize="16dp" >
             </Button>
         </RelativeLayout>

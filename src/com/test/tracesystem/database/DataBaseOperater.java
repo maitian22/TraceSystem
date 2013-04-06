@@ -58,6 +58,9 @@ public class DataBaseOperater {
 		}else{
 			dbHelper.creatTable(childNameEnglish, tableListString.size());
 			id=dbHelper.insertChildTableFirstLine(childName,childNameEnglish, tableListString);
+			/*LogUtil.out("aa", "childName:"+childName+"childNameEnglish:"+childNameEnglish);
+			for(int i = 0;i<tableListString.size();i++)
+				LogUtil.out("aa", "tableListString.get(i):"+tableListString.get(i));*/
 			if(id==-1){
 				result=false;
 			}else{
@@ -101,7 +104,7 @@ public class DataBaseOperater {
 			String[] data=new String[columCount];
 			for(int i=0;i<data.length;i++){
 				data[i]=cursor.getString(i);
-				LogUtil.out("aa", "data--->"+data[i]);
+		//		LogUtil.out("aa", "data--->"+data[i]);
 			}
 			list.add(data);
 		}
@@ -130,6 +133,10 @@ public class DataBaseOperater {
 		boolean result=false;
 		dbHelper.openDatabase(context);
 		
+		/*LogUtil.out("aa", "tableNameEnglish:"+tableNameEnglish+" id:"+id);
+		for(int i = 0; i< tableListString.size();i++){
+			LogUtil.out("aa", "getList:"+tableListString.get(i));
+		}*/
 		int ids=dbHelper.updataDataChild(tableNameEnglish, tableListString, id);
 		if(ids>0){
 			result=true;

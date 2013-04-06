@@ -25,6 +25,7 @@ public class AddTableDialog extends Dialog implements android.view.View.OnClickL
 	String name;
 	String tableName;
 	Handler handler;
+	public static int MAX_RORM_RANG = 20;
 	public AddTableDialog(Context context,String name,String tableName,Handler handler) {
 		super(context);
 		// TODO Auto-generated constructor stub
@@ -140,7 +141,7 @@ public class AddTableDialog extends Dialog implements android.view.View.OnClickL
 	public void initEditText(){
 		listEdit=null;
 		listEdit=new ArrayList<EditText>();
-		for(int i=0;i<50;i++){
+		for(int i=0;i<MAX_RORM_RANG;i++){
 			View view=inflater.inflate(R.layout.add_table_dialog_item, null);
 			
 			EditText edit=(EditText)view.findViewById(R.id.item_edit);

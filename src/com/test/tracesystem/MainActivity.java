@@ -20,6 +20,7 @@ import com.test.tracesystem.activity.CustomInquery;
 import com.test.tracesystem.activity.LeftMenuActivity;
 import com.test.tracesystem.activity.RightChildActivity;
 import com.test.tracesystem.util.Constant;
+import com.test.tracesystem.util.LogUtil;
 import com.test.tracesystem.util.ToastUtil;
 
 public class MainActivity extends ActivityGroup {
@@ -35,15 +36,16 @@ public class MainActivity extends ActivityGroup {
 			if (msg.what == Constant.FLAG_START_ACTIVITY) {
 				right_view.removeAllViews();
 				Class<?> rightClass;
-				if(msg.arg1 == Constant.parentMenu.length && msg.arg2 == 1){
+				if(msg.arg1 == Constant.parentMenu.length-1 && msg.arg2 == 1){
 					//choose custom inquery option
 					rightClass = CustomInquery.class;
 				}else{
 					rightClass = RightChildActivity.class;
 				}
+				LogUtil.out("aa", "rightClass:"+rightClass.getName());
 				String name = Constant.childMenu[msg.arg1][msg.arg2];
 				String tableName = Constant.parentTableName[msg.arg1][msg.arg2];
-				Intent intent = new Intent(context, RightChildActivity.class);
+				Intent intent = new Intent(context, rightClass);
 				intent.putExtra("name", name);
 				intent.putExtra("tableName", tableName);
 				View views = activityManager.startActivity(tableName, intent)

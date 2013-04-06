@@ -2,6 +2,8 @@ package com.test.tracesystem.adapter;
 
 import java.util.List;
 
+import com.test.tracesystem.util.LogUtil;
+
 import android.R;
 import android.content.Context;
 import android.graphics.Color;
@@ -41,17 +43,26 @@ public class RightChildAdapter extends BaseAdapter {
 	class TableRowView extends LinearLayout {
 		public TableRowView(Context context, TableRow tableRow) {
 			super(context);
-			
+			TableCell tableCell;
 			this.setOrientation(LinearLayout.HORIZONTAL);
+			//LogUtil.out("aa", "tableRow.getSize:"+tableRow.getSize());
 			for (int i = 0; i < tableRow.getSize(); i++) {//逐个格单元添加到行
-				TableCell tableCell = tableRow.getCellValue(i);
+				tableCell = tableRow.getCellValue(i);
 				LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-						tableCell.width, tableCell.height);//按照格单元指定的大小设置空间
-				layoutParams.setMargins(0, 0, 1, 1);//预留空隙制造边框
+						tableCell.width, LinearLayout.LayoutParams.MATCH_PARENT);//tableCell.height);//按照格单元指定的大小设置空间
+				layoutParams.setMargins(1, 1, 1, 1);//预留空隙制造边框
 				if (tableCell.type == TableCell.STRING) {//如果格单元是文本内容
 					TextView textCell = new TextView(context);
 					textCell.setLines(3);
-					textCell.setGravity(Gravity.CENTER_HORIZONTAL);
+				//	LogUtil.out("aa", "TableRowView:"+tableCell.value.toString());
+				//	textCell.setGravity(Gravity.CENTER);
+				/*	if(tableCell.value.toString().length()>6){	
+						LogUtil.out("aa", "TableRowView:"+tableCell.value.toString()+" length():"+
+								tableCell.value.toString().length());  
+						
+						textCell.setLayoutParams(layoutParams);
+					}else*/
+					textCell.setGravity(Gravity.CENTER);
 					textCell.setBackgroundColor(Color.BLACK);//背景黑色
 					textCell.setText(String.valueOf(tableCell.value));
 					textCell.setTextColor(context.getResources().getColor(R.color.white));

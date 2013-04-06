@@ -40,20 +40,20 @@ public class RightChildActivity extends Activity implements OnClickListener {
 	Context context;
 	SystemAppcation application;
 	LayoutInflater inflater;
-	
-	Handler handler=new Handler(){
+
+	Handler handler = new Handler() {
 
 		@Override
 		public void handleMessage(Message msg) {
 			// TODO Auto-generated method stub
 			super.handleMessage(msg);
-			
-			if(msg.what==1){// refresh 
+
+			if (msg.what == 1) {// refresh
 				new TableInfoTask().execute();
 			}
-			
+
 		}
-		
+
 	};
 
 	@Override
@@ -67,11 +67,9 @@ public class RightChildActivity extends Activity implements OnClickListener {
 		setContentView(R.layout.right_menu_activity);
 		initView();
 		initEvent();
-		
+
 	}
-	
-	
-	
+
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
@@ -79,8 +77,6 @@ public class RightChildActivity extends Activity implements OnClickListener {
 		LogUtil.out("aa", "onresume");
 		new TableInfoTask().execute();
 	}
-
-
 
 	public TextView title_tx;
 	public Button add_btn;
@@ -112,8 +108,9 @@ public class RightChildActivity extends Activity implements OnClickListener {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.title_button:
-			ToastUtil.i(context, "添加表单被点击");
-			AddTableDialog dialog = new AddTableDialog(context, name, tableName,handler);
+			ToastUtil.i(context, "添加批次被点击");
+			AddTableDialog dialog = new AddTableDialog(context, name,
+					tableName, handler);
 			dialog.show();
 			break;
 		}
@@ -121,14 +118,15 @@ public class RightChildActivity extends Activity implements OnClickListener {
 
 	ArrayList<ArrayList<String[]>> listData;
 	ArrayList<TotalTableEntity> list;
+
 	class TableInfoTask extends AsyncTask<String, Boolean, Boolean> {
 
 		@Override
 		protected Boolean doInBackground(String... params) {
 			// TODO Auto-generated method stub
 
-			list = DataBaseOperater.getInstance(
-					context).queryParentTable(name, tableName);
+			list = DataBaseOperater.getInstance(context).queryParentTable(name,
+					tableName);
 			if (list.size() == 0) {
 				return false;
 			} else {
@@ -140,7 +138,7 @@ public class RightChildActivity extends Activity implements OnClickListener {
 					listData.add(data);
 				}
 			}
-			
+
 			return true;
 		}
 
@@ -159,7 +157,7 @@ public class RightChildActivity extends Activity implements OnClickListener {
 					tableLinearLayout.removeAllViews();
 					for (int i = 0; i < listData.size(); i++) {
 						ArrayList<String[]> data = listData.get(i);
-						initTableLinearlayout(data,list.get(i));
+						initTableLinearlayout(data, list.get(i));
 					}
 
 				}
@@ -169,13 +167,15 @@ public class RightChildActivity extends Activity implements OnClickListener {
 		}
 	}
 
-	public void initTableLinearlayout(ArrayList<String[]> data,TotalTableEntity entity) {
+	public void initTableLinearlayout(ArrayList<String[]> data,
+			TotalTableEntity entity) {
 		View tableChildView = inflater.inflate(R.layout.right_menu_child, null);
-		initTableView(tableChildView, data,entity);
+		initTableView(tableChildView, data, entity);
 		tableLinearLayout.addView(tableChildView);
 	}
 
-	public void initTableView(View v, final ArrayList<String[]> data,final TotalTableEntity entitys) {
+	public void initTableView(View v, final ArrayList<String[]> data,
+			final TotalTableEntity entitys) {
 		ListView lv;
 		lv = (ListView) v.findViewById(R.id.ListView01);
 		ArrayList<TableRow> table = new ArrayList<TableRow>();
@@ -188,10 +188,17 @@ public class RightChildActivity extends Activity implements OnClickListener {
 			TableCell[] titles = new TableCell[length];
 			for (int j = 0; j < length; j++) {
 				if (i == 0 && j == 0) {
-					titles[j] = new TableCell("_id", width,
+					// titles[j] = new TableCell("_id", width,
+					titles[j] = new TableCell(entitys.getChild(), width,
+							(int) (width * 0.6), TableCell.STRING);
+				} else if (i != 0 && j == 0) {
+					titles[j] = new TableCell(
+							"" + (Integer.valueOf(entity[j].toString()
+											.trim()) - 1), width,
 							(int) (width * 0.6), TableCell.STRING);
 				} else {
-					titles[j] = new TableCell(entity[j], width,
+					// LogUtil.out("aa","entity[j]:"+Integer.valueOf(entity[j].toString().trim()));
+					titles[j] = new TableCell(entity[j].toString(), width,
 							(int) (width * 0.6), TableCell.STRING);
 				}
 			}
@@ -199,113 +206,127 @@ public class RightChildActivity extends Activity implements OnClickListener {
 		}
 		RightChildAdapter tableAdapter = new RightChildAdapter(this, table);
 		lv.setAdapter(tableAdapter);
-//		lv.setOnItemClickListener(new ItemClickEvent());
+		// lv.setOnItemClickListener(new ItemClickEvent());
 		lv.setLayoutParams(new FrameLayout.LayoutParams(-1,
 				(int) (width * 0.6 * (data.size() + 1))));
 
 		TextView tx = (TextView) v.findViewById(R.id.title_text);
 		Button btnDel = (Button) v.findViewById(R.id.del_button);
 		Button btnAdd = (Button) v.findViewById(R.id.title_button);
-
-		tx.setText(entitys.getChild());
 		
+		//btnDel.setText(btnDel.getText()+entitys.getChild());
+		
+		//tx.setText(entitys.getChild());
+
 		btnDel.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
-				
-				AlertDialog.Builder builder=new AlertDialog.Builder(context);
-				builder.setTitle("确定删除表--->"+entitys.getChild());
+
+				AlertDialog.Builder builder = new AlertDialog.Builder(context);
+				builder.setTitle("确定删除此批次? " + entitys.getChild());
 				builder.setPositiveButton("取消", new Dialog.OnClickListener() {
-					
+
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						// TODO Auto-generated method stub
 					}
 				});
 				builder.setNegativeButton("确定", new Dialog.OnClickListener() {
-					
+
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						// TODO Auto-generated method stub
-						boolean result=DataBaseOperater.getInstance(context).deleteTable(entitys.getChildEnglish());
-						if(result){
+						boolean result = DataBaseOperater.getInstance(context)
+								.deleteTable(entitys.getChildEnglish());
+						if (result) {
 							ToastUtil.s(context, "删除成功");
 							handler.sendEmptyMessage(1);
-						}else{
+						} else {
 							ToastUtil.s(context, "删除失败");
 						}
 					}
 				});
-				
+
 				builder.show();
-				
-				
-				
+
 			}
 		});
-		
+
 		btnAdd.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				AddAndUpdateChildDialog dialog = new AddAndUpdateChildDialog(context, entitys, "insert",null,data.get(0),handler);
+				AddAndUpdateChildDialog dialog = new AddAndUpdateChildDialog(
+						context, entitys, "insert", null, data.get(0), handler);
 				dialog.show();
 			}
 		});
-		
+
 		lv.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
-				
-				AddAndUpdateChildDialog dialog = new AddAndUpdateChildDialog(context, entitys, "updata",data.get(position),data.get(0),handler);
+
+				AddAndUpdateChildDialog dialog = new AddAndUpdateChildDialog(
+						context, entitys, "updata", data.get(position), data
+								.get(0), handler);
 				dialog.show();
-				
+
 			}
 		});
-		
+
 		lv.setOnItemLongClickListener(new OnItemLongClickListener() {
 
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
-				if(position!=0){
-					AlertDialog.Builder builder=new AlertDialog.Builder(context);
-					builder.setTitle("对数据_id="+data.get(position)[0]+"操作？");
-					final int index=position;
-					builder.setPositiveButton("修改数据", new Dialog.OnClickListener() {
-						
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							// TODO Auto-generated method stub
-							AddAndUpdateChildDialog dialog2 = new AddAndUpdateChildDialog(context, entitys, "updata",data.get(index),data.get(0),handler);
-							dialog2.show();
-						}
-					});
-					builder.setNegativeButton("删除数据", new Dialog.OnClickListener() {
-						
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							// TODO Auto-generated method stub
-							boolean result=DataBaseOperater.getInstance(context).deleteChild(entitys.getChildEnglish(), data.get(index)[0]);
-							if(result){
-								ToastUtil.s(context, "删除成功");
-								handler.sendEmptyMessage(1);
-							}else{
-								ToastUtil.s(context, "删除失败");
-							}
-						}
-					});
-					
+				if (position != 0) {
+					AlertDialog.Builder builder = new AlertDialog.Builder(
+							context);
+					builder.setTitle("对第"+(Integer.valueOf(data.get(position)[0])-1)+"行数据" + "操作？");
+					final int index = position;
+					builder.setPositiveButton("修改数据",
+							new Dialog.OnClickListener() {
+
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									// TODO Auto-generated method stub
+									AddAndUpdateChildDialog dialog2 = new AddAndUpdateChildDialog(
+											context, entitys, "updata", data
+													.get(index), data.get(0),
+											handler);
+									dialog2.show();
+								}
+							});
+					builder.setNegativeButton("删除数据",
+							new Dialog.OnClickListener() {
+
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									// TODO Auto-generated method stub
+									boolean result = DataBaseOperater
+											.getInstance(context).deleteChild(
+													entitys.getChildEnglish(),
+													data.get(index)[0]);
+									if (result) {
+										ToastUtil.s(context, "删除成功");
+										handler.sendEmptyMessage(1);
+									} else {
+										ToastUtil.s(context, "删除失败");
+									}
+								}
+							});
+
 					builder.show();
-					
+
 				}
 				return false;
 			}

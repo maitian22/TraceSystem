@@ -27,9 +27,8 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
             android:padding="10dp"
-            android:text="添加表单"
+            android:text="添加批次号"
             android:background="@drawable/title_button"
-            
             android:textSize="16dp" >
         </Button>
     </RelativeLayout>

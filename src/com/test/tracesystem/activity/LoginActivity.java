@@ -23,6 +23,7 @@ import android.widget.TextView;
 
 import com.test.tracesystem.MainActivity;
 import com.test.tracesystem.R;
+import com.test.tracesystem.util.LogUtil;
 
 public class LoginActivity extends Activity {
 	/**
@@ -79,6 +80,7 @@ public class LoginActivity extends Activity {
 		mShareP = PreferenceManager.getDefaultSharedPreferences(this);
 		mEmail = mShareP.getString("Email", "foo@example.com");
 		mPassword = mShareP.getString("Password", "");
+		LogUtil.out("aa","mPassword:"+mPassword);
 
 		mEmailView = (EditText) findViewById(R.id.email);
 		mEmailView.setText(mEmail);
@@ -112,12 +114,10 @@ public class LoginActivity extends Activity {
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						
+						attemptLogin();
 						mShareP.edit().putString("Email", mEmail).commit();
 						if(mRembPassw.isChecked())
 							mShareP.edit().putString("Password", mPassword).commit();
-						
-						attemptLogin();
 					}
 				});
 	}

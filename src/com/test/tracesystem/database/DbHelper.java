@@ -119,7 +119,7 @@ public class DbHelper {
 		initialValues.put("childname", childName);
 		initialValues.put("childnameenglish", childNameEnglish);
 		
-		LogUtil.out("aa", name+"name---"+nameEnglish+"nameenglish---"+childName+"childname---"+childNameEnglish+"childnameenglish---");
+		//LogUtil.out("aa", name+"name---"+nameEnglish+"nameenglish---"+childName+"childname---"+childNameEnglish+"childnameenglish---");
 		
 		return sqldb.insert(DATABASE_TABLE, null, initialValues);
 	}
