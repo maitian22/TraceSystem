@@ -1,0 +1,20 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+    
+    <TextView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textSize="16dp"
+        android:textColor="@color/black"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="消费者查询"/>
+    <EditText
+        android:id="@+id/mInputNum" 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="请输入产品批次号"
+        />
+</RelativeLayout>
