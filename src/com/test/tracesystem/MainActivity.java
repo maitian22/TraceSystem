@@ -16,7 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.aliyun.android.oss.OSSClient;
-import com.test.tracesystem.activity.CustomInquery;
+import com.test.tracesystem.activity.CustomInqueryActivity;
 import com.test.tracesystem.activity.LeftMenuActivity;
 import com.test.tracesystem.activity.RightChildActivity;
 import com.test.tracesystem.util.Constant;
@@ -38,7 +38,7 @@ public class MainActivity extends ActivityGroup {
 				Class<?> rightClass;
 				if(msg.arg1 == Constant.parentMenu.length-1 && msg.arg2 == 1){
 					//choose custom inquery option
-					rightClass = CustomInquery.class;
+					rightClass = CustomInqueryActivity.class;
 				}else{
 					rightClass = RightChildActivity.class;
 				}

@@ -2,19 +2,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
-    
-    <TextView 
+
+    <TextView
+        android:id="@+id/mText"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:textSize="16dp"
-        android:textColor="@color/black"
+        android:text="消费者查询"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="消费者查询"/>
-    <EditText
-        android:id="@+id/mInputNum" 
-        android:layout_width="wrap_content"
+        android:textColor="@color/black" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="请输入产品批次号"
-        />
+        android:layout_below="@+id/mText"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/mInputNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="请输入产品批次号" />
+        <Button
+            android:id="@+id/mSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/title_button"
+            android:text="查询"
+            />
+    </LinearLayout>
+    
+    
+
 </RelativeLayout>
