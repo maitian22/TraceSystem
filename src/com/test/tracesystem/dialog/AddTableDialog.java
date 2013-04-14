@@ -88,13 +88,7 @@ public class AddTableDialog extends Dialog implements android.view.View.OnClickL
 				checkTableNameExit();
 			}
 			
-			
-			
-			break;
-		case R.id.cancel_btn:
-			dismiss();
-			break;
-		case R.id.ensure_btn:
+
 			if(title_edit.getText().toString().trim().equals("")){
 				ToastUtil.s(context, "表名不能为空");
 			}else{
