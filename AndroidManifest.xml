@@ -22,7 +22,7 @@
         </activity>
         <activity android:name=".activity.LeftMenuActivity" >
         </activity>
-        <activity android:name=".activity.RightChildActivity" >
+        <activity android:name=".activity.RightChildActivity" > 
         </activity>
         <activity android:name=".activity.CustomInqueryActivity" >
         </activity>
