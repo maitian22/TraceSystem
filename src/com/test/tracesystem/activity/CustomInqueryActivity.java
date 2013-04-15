@@ -39,6 +39,7 @@ public class CustomInqueryActivity extends Activity implements
 	LinearLayout tableLinearLayout;
 	ArrayList<ArrayList<String[]>> listData;
 	ArrayList<TotalTableEntity> list;
+	ArrayList<ArrayList<TotalTableEntity>> listname;
 
 	private void initView() {
 		mInputText = (EditText) findViewById(R.id.mInputNum);
@@ -47,7 +48,11 @@ public class CustomInqueryActivity extends Activity implements
 		tableLinearLayout = (LinearLayout) findViewById(R.id.addlinear_view);
 
 	}
-
+	
+	private void initEvent() {
+		mSearch.setOnClickListener(this);
+		LogUtil.out("aa", "CustomInquery init Event............");
+	}
 	class TableInfoTask extends AsyncTask<String, Boolean, Boolean> {
 
 		@Override
@@ -61,15 +66,18 @@ public class CustomInqueryActivity extends Activity implements
 									Constant.childMenu[i][j],
 									Constant.parentTableName[i][j]);
 					if (list.size() == 0) {
-						return false;
+						continue;
 					} else {
 						listData = new ArrayList<ArrayList<String[]>>();
 						for (int k = 0; k < list.size(); k++) {
+							LogUtil.out("aa", "Custom inquery list.get(k).getChild():"+list.get(k).getChild());
 							if(list.get(k).getChild().equals(mInputText.getEditableText().toString())){
 								ArrayList<String[]> data = DataBaseOperater
 								.getInstance(mContext).queryChildTable(
 										list.get(k).getChildEnglish());
 								listData.add(data);
+								listname.add(list);
+								LogUtil.out("aa", "Custom inquery listData added");
 							}
 						}
 					}
@@ -94,7 +102,7 @@ public class CustomInqueryActivity extends Activity implements
 					tableLinearLayout.removeAllViews();
 					for (int i = 0; i < listData.size(); i++) {
 						ArrayList<String[]> data = listData.get(i);
-						initTableLinearlayout(data, list.get(i));
+						initTableLinearlayout(data, listname.get(i).get(i));
 					}
 
 				}
@@ -106,6 +114,7 @@ public class CustomInqueryActivity extends Activity implements
 	
 	public void initTableLinearlayout(ArrayList<String[]> data,
 			TotalTableEntity entity) {
+		LogUtil.out("aa", "custom inquery initTableLinearLayout....");
 		View tableChildView = inflater.inflate(R.layout.right_menu_child, null);
 		initTableView(tableChildView, data, entity);
 		tableLinearLayout.addView(tableChildView);
@@ -148,10 +157,6 @@ public class CustomInqueryActivity extends Activity implements
 
 		TextView tx = (TextView) v.findViewById(R.id.title_text);
 	}
-	private void initEvent() {
-		mSearch.setOnClickListener(this);
-		LogUtil.out("aa", "CustomInquery init Event............");
-	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -174,7 +179,7 @@ public class CustomInqueryActivity extends Activity implements
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		LogUtil.out("aa", "custom inquery clicked .............");
-		if (mInputText.getText().toString().equals("")) {
+		if (!mInputText.getText().toString().equals("")) {
 			LogUtil.out("aa", "getEditText:"+mInputText.getEditableText().toString());
 			DisplayInqueryMessage(mInputText.getText().toString());
 		} else {
