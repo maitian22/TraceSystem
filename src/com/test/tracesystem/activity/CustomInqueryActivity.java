@@ -39,7 +39,7 @@ public class CustomInqueryActivity extends Activity implements
 	LinearLayout tableLinearLayout;
 	ArrayList<ArrayList<String[]>> listData;
 	ArrayList<TotalTableEntity> list;
-	ArrayList<ArrayList<TotalTableEntity>> listname;
+	ArrayList<TotalTableEntity> listname;
 
 	private void initView() {
 		mInputText = (EditText) findViewById(R.id.mInputNum);
@@ -68,7 +68,6 @@ public class CustomInqueryActivity extends Activity implements
 					if (list.size() == 0) {
 						continue;
 					} else {
-						listData = new ArrayList<ArrayList<String[]>>();
 						for (int k = 0; k < list.size(); k++) {
 							LogUtil.out("aa", "Custom inquery list.get(k).getChild():"+list.get(k).getChild());
 							if(list.get(k).getChild().equals(mInputText.getEditableText().toString())){
@@ -76,7 +75,7 @@ public class CustomInqueryActivity extends Activity implements
 								.getInstance(mContext).queryChildTable(
 										list.get(k).getChildEnglish());
 								listData.add(data);
-								listname.add(list);
+								listname.add(list.get(k));
 								LogUtil.out("aa", "Custom inquery listData added");
 							}
 						}
@@ -102,7 +101,8 @@ public class CustomInqueryActivity extends Activity implements
 					tableLinearLayout.removeAllViews();
 					for (int i = 0; i < listData.size(); i++) {
 						ArrayList<String[]> data = listData.get(i);
-						initTableLinearlayout(data, listname.get(i).get(i));
+						LogUtil.out("aa", "listData.size:"+listData.size());
+						initTableLinearlayout(data, listname.get(i));
 					}
 
 				}
@@ -156,6 +156,8 @@ public class CustomInqueryActivity extends Activity implements
 				(int) (width * 0.6 * (data.size() + 1))));
 
 		TextView tx = (TextView) v.findViewById(R.id.title_text);
+		tx.setVisibility(android.view.View.VISIBLE);
+		tx.setText(entitys.getName());
 	}
 
 	@Override
@@ -167,6 +169,10 @@ public class CustomInqueryActivity extends Activity implements
 		application = (SystemAppcation) getApplication();
 		inflater = LayoutInflater.from(mContext);
 		setContentView(R.layout.custom_inquery);
+		
+		listname = new ArrayList<TotalTableEntity>();
+		listData = new ArrayList<ArrayList<String[]>>();
+		
 		initView();
 		initEvent();
 	}
