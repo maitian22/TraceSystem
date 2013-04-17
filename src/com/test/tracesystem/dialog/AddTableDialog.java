@@ -113,6 +113,34 @@ public class AddTableDialog extends Dialog implements android.view.View.OnClickL
 				
 			}
 			break;
+			
+		case R.id.cancel_btn:
+			dismiss();
+			break;
+		case R.id.ensure_btn:
+			if(title_edit.getText().toString().trim().equals("")){
+				ToastUtil.s(context, "批次不能为空");
+			}else{
+				columName = getColumName();
+				if(columName==null){
+					ToastUtil.s(context, "请添加列名");
+				}else{
+					if(checkTableNameExit()){
+						boolean result=DataBaseOperater.getInstance(context).addTable(name,tableName,editTableName,editRableNameEnglish,columName);
+						if(result){
+							ToastUtil.s(context, "添加"+editTableName+"成功");
+							handler.sendEmptyMessage(1);
+							dismiss();
+						}else{
+							ToastUtil.s(context, "添加"+editTableName+"失败");
+						}
+					}
+					
+				}
+				
+				
+			}
+			break;
 		}
 	}
 	public boolean checkTableNameExit(){

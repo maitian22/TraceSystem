@@ -88,7 +88,6 @@ public class RightChildActivity extends Activity implements OnClickListener {
 		title_tx = (TextView) findViewById(R.id.title_text);
 		add_btn = (Button) findViewById(R.id.title_button);
 		tableLinearLayout = (LinearLayout) findViewById(R.id.addlinear_view);
-
 		if (getIntent().getExtras() == null) {
 			return;
 		} else {
@@ -179,8 +178,8 @@ public class RightChildActivity extends Activity implements OnClickListener {
 		ListView lv;
 		lv = (ListView) v.findViewById(R.id.ListView01);
 		ArrayList<TableRow> table = new ArrayList<TableRow>();
-		int width = 260;
-		LogUtil.out("aa", "width--->" + width);
+		int width = 210;
+		LogUtil.out("aa", "data.size()--->" + data.size());
 
 		for (int i = 0; i < data.size(); i++) {
 			String[] entity = data.get(i);
@@ -190,25 +189,26 @@ public class RightChildActivity extends Activity implements OnClickListener {
 				if (i == 0 && j == 0) {
 					// titles[j] = new TableCell("_id", width,
 					titles[j] = new TableCell(entitys.getChild(), width,
-							(int) (width * 0.6), TableCell.STRING);
+							(int) (width * 0.3), TableCell.STRING);
 				} else if (i != 0 && j == 0) {
 					titles[j] = new TableCell(
 							"" + (Integer.valueOf(entity[j].toString()
 											.trim()) - 1), width,
-							(int) (width * 0.6), TableCell.STRING);
+							(int) (width * 0.3), TableCell.STRING);
 				} else {
 					// LogUtil.out("aa","entity[j]:"+Integer.valueOf(entity[j].toString().trim()));
 					titles[j] = new TableCell(entity[j].toString(), width,
-							(int) (width * 0.6), TableCell.STRING);
+							(int) (width * 0.3), TableCell.STRING);
 				}
 			}
 			table.add(new TableRow(titles));
 		}
 		RightChildAdapter tableAdapter = new RightChildAdapter(this, table);
 		lv.setAdapter(tableAdapter);
+	
 		// lv.setOnItemClickListener(new ItemClickEvent());
 		lv.setLayoutParams(new FrameLayout.LayoutParams(-1,
-				(int) (width * 0.6 * (data.size() + 1))));
+				(int) ((width * 0.32) * data.size()+1)));
 
 		TextView tx = (TextView) v.findViewById(R.id.title_text);
 		Button btnDel = (Button) v.findViewById(R.id.del_button);

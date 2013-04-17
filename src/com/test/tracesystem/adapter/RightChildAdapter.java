@@ -49,7 +49,8 @@ public class RightChildAdapter extends BaseAdapter {
 			for (int i = 0; i < tableRow.getSize(); i++) {//逐个格单元添加到行
 				tableCell = tableRow.getCellValue(i);
 				LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-						tableCell.width, LinearLayout.LayoutParams.MATCH_PARENT);//tableCell.height);//按照格单元指定的大小设置空间
+						tableCell.width, /*LinearLayout.LayoutParams.WRAP_CONTENT);*/tableCell.height);//按照格单元指定的大小设置空间
+				//LogUtil.out("aa", "tableCell.height:"+tableCell.height);
 				layoutParams.setMargins(1, 1, 1, 1);//预留空隙制造边框
 				if (tableCell.type == TableCell.STRING) {//如果格单元是文本内容
 					TextView textCell = new TextView(context);
