@@ -2,8 +2,6 @@ package com.test.tracesystem.adapter;
 
 import java.util.List;
 
-import com.test.tracesystem.util.LogUtil;
-
 import android.R;
 import android.content.Context;
 import android.graphics.Color;
@@ -48,9 +46,15 @@ public class RightChildAdapter extends BaseAdapter {
 			//LogUtil.out("aa", "tableRow.getSize:"+tableRow.getSize());
 			for (int i = 0; i < tableRow.getSize(); i++) {//逐个格单元添加到行
 				tableCell = tableRow.getCellValue(i);
-				LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-						tableCell.width, /*LinearLayout.LayoutParams.WRAP_CONTENT);*/tableCell.height);//按照格单元指定的大小设置空间
-				//LogUtil.out("aa", "tableCell.height:"+tableCell.height);
+				LinearLayout.LayoutParams layoutParams;
+				if(tableCell.value.toString().length()>10){
+				layoutParams = new LinearLayout.LayoutParams(
+						tableCell.width, LinearLayout.LayoutParams.MATCH_PARENT);//按照格单元指定的大小设置空间
+				}else{
+					layoutParams = new LinearLayout.LayoutParams(
+							tableCell.width, tableCell.height);
+				}
+					
 				layoutParams.setMargins(1, 1, 1, 1);//预留空隙制造边框
 				if (tableCell.type == TableCell.STRING) {//如果格单元是文本内容
 					TextView textCell = new TextView(context);
