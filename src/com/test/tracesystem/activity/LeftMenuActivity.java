@@ -12,6 +12,8 @@ import android.widget.AbsListView;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
+import android.widget.ExpandableListView.OnGroupCollapseListener;
+import android.widget.ExpandableListView.OnGroupExpandListener;
 import android.widget.TextView;
 
 import com.test.tracesystem.R;
@@ -26,6 +28,12 @@ public class LeftMenuActivity extends Activity {
 	
 	String[] groupString=Constant.parentMenu;
 	String[][] childString=Constant.childMenu;
+	String[] thirdString = {
+		"aaaaaaaaaaaaaa"	
+	};
+	String[] thirdChildString = {
+			"1111111111","22222222","333333333"
+	};
 	
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
@@ -46,6 +54,10 @@ public class LeftMenuActivity extends Activity {
 
 	ExpandableListView expandableListView;
 	ExpandListAdapter adapter;
+	ChildExpandListAdapter childadapter;
+	
+	AbsListView.LayoutParams lp;
+	
 	public void initView() {
 		expandableListView = (ExpandableListView) findViewById(R.id.list);
 		adapter=new ExpandListAdapter();
@@ -79,7 +91,79 @@ public class LeftMenuActivity extends Activity {
 			}
 		});
 	}
+	
+	class ChildExpandListAdapter extends BaseExpandableListAdapter{
 
+		@Override
+		public Object getChild(int groupPosition, int childPosition) {
+			// TODO Auto-generated method stub
+			return thirdChildString[childPosition];
+		}
+
+		@Override
+		public long getChildId(int groupPosition, int childPosition) {
+			// TODO Auto-generated method stub
+			return childPosition;
+		}
+
+		@Override
+		public View getChildView(int groupPosition, int childPosition,
+				boolean isLastChild, View convertView, ViewGroup parent) {
+			// TODO Auto-generated method stub
+			//return null;
+			TextView tx=getTextView(40);
+			tx.setText(thirdChildString[childPosition]);
+			return tx;
+		}
+
+		@Override
+		public int getChildrenCount(int groupPosition) {
+			// TODO Auto-generated method stub
+			return 3;
+		}
+
+		@Override
+		public Object getGroup(int groupPosition) {
+			// TODO Auto-generated method stub
+			return thirdString[groupPosition];
+		}
+
+		@Override
+		public int getGroupCount() {
+			// TODO Auto-generated method stub
+			return 1;
+		}
+
+		@Override
+		public long getGroupId(int groupPosition) {
+			// TODO Auto-generated method stub
+			return groupPosition;
+		}
+
+		@Override
+		public View getGroupView(int groupPosition, boolean isExpanded,
+				View convertView, ViewGroup parent) {
+			// TODO Auto-generated method stub
+			TextView tx=getTextView(20);
+			tx.setText(thirdString[groupPosition]);
+			return tx;
+
+		}
+
+		@Override
+		public boolean hasStableIds() {
+			// TODO Auto-generated method stub
+			return true;
+		}
+
+		@Override
+		public boolean isChildSelectable(int groupPosition, int childPosition) {
+			// TODO Auto-generated method stub
+			return true;
+		}
+		
+	}
+	
 	class ExpandListAdapter extends BaseExpandableListAdapter {
 
 		@Override
@@ -137,6 +221,47 @@ public class LeftMenuActivity extends Activity {
 		public View getChildView(int groupPosition, int childPosition,
 				boolean isLastChild, View convertView, ViewGroup parent) {
 			// TODO Auto-generated method stub
+			if(groupPosition == 0 && childPosition == 0){
+				final ExpandableListView temp = new ExpandableListView(context);
+				lp = new AbsListView.LayoutParams(
+						ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+				
+				childadapter=new ChildExpandListAdapter();
+				temp.setLayoutParams(lp); 
+				temp.setAdapter(childadapter);
+				
+				temp.setOnGroupExpandListener(new OnGroupExpandListener(){
+					@Override
+					public void onGroupExpand(int groupPosition) {
+						// TODO Auto-generated method stub
+						lp = new AbsListView.LayoutParams(
+								ViewGroup.LayoutParams.MATCH_PARENT,temp.getHeight()*4); 
+						temp.setLayoutParams(lp);
+					}	
+				});
+				temp.setOnGroupCollapseListener(new OnGroupCollapseListener(){
+					@Override
+					public void onGroupCollapse(int groupPosition) {
+						// TODO Auto-generated method stub
+						lp = new AbsListView.LayoutParams(
+								ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT); 
+						temp.setLayoutParams(lp);
+					}
+					
+				});
+				temp.setOnChildClickListener(new OnChildClickListener(){
+					@Override
+					public boolean onChildClick(ExpandableListView parent,
+							View v, int groupPosition, int childPosition,
+							long id) {
+						// TODO Auto-generated method stub
+						return false;
+					}
+					
+				});
+				return temp;
+				
+			}
 			TextView tx=getTextView(20);
 			tx.setText(childString[groupPosition][childPosition]);
 			return tx;

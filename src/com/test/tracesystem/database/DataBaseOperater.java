@@ -1,5 +1,6 @@
 package com.test.tracesystem.database;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import android.content.Context;
@@ -87,6 +88,7 @@ public class DataBaseOperater {
 				entity.setChildEnglish(cursor.getString(cursor.getColumnIndex("childnameenglish")));
 				list.add(entity);
 			}
+			
 			cursor.close();
 		}
 		
@@ -170,6 +172,10 @@ public class DataBaseOperater {
 			dbHelper.deleteChildTable(childNameEnglish);
 			result=true;
 		}
+		
+		byte[] a = new byte[64];
+		for(int i=0;i<64;i++)
+		 a[i] = 0;
 		
 		dbHelper.closeDb();
 		return result;
