@@ -53,15 +53,15 @@ public class LeftMenuActivity extends Activity {
 	}
 
 	ExpandableListView expandableListView;
-	ExpandListAdapter adapter;
-	ChildExpandListAdapter childadapter;
+	ExpandListAdapter Secondsadapter;
+	ThirdExpandListAdapter Thirdadapter;
 	
 	AbsListView.LayoutParams lp;
 	
 	public void initView() {
 		expandableListView = (ExpandableListView) findViewById(R.id.list);
-		adapter=new ExpandListAdapter();
-		expandableListView.setAdapter(adapter);
+		Secondsadapter=new ExpandListAdapter();
+		expandableListView.setAdapter(Secondsadapter);
 		/***
 		 * 设置group展开的图标
 		 */
@@ -92,7 +92,7 @@ public class LeftMenuActivity extends Activity {
 		});
 	}
 	
-	class ChildExpandListAdapter extends BaseExpandableListAdapter{
+	class ThirdExpandListAdapter extends BaseExpandableListAdapter{
 
 		@Override
 		public Object getChild(int groupPosition, int childPosition) {
@@ -226,9 +226,9 @@ public class LeftMenuActivity extends Activity {
 				lp = new AbsListView.LayoutParams(
 						ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
 				
-				childadapter=new ChildExpandListAdapter();
+				Thirdadapter=new ThirdExpandListAdapter();
 				temp.setLayoutParams(lp); 
-				temp.setAdapter(childadapter);
+				temp.setAdapter(Thirdadapter);
 				
 				temp.setOnGroupExpandListener(new OnGroupExpandListener(){
 					@Override
