@@ -72,8 +72,6 @@ public class LeftMenuActivity extends Activity {
 				ToastUtil.i(context, childString[groupPosition][childPosition]);
 				LogUtil.out("aa", "groupPosition:" + groupPosition
 						+ "childPosition:" + childPosition);
-				String tableName = Constant.parentTableName[groupPosition][childPosition];
-
 				Message msg = new Message();
 				msg.what = Constant.FLAG_START_ACTIVITY;
 				msg.arg1 = groupPosition;
@@ -255,9 +253,6 @@ public class LeftMenuActivity extends Activity {
 							View v, int groupPosition, int childPosition,
 							long id) {
 						// TODO Auto-generated method stub
-
-						String tableName = Constant.parentTableName[groupPosition][childPosition];
-
 						Message msg = new Message();
 						msg.what = Constant.FLAG_START_ACTIVITY;
 						msg.arg1 = Constant.productProgressManagerment.groupid;
