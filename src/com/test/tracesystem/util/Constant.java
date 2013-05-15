@@ -33,6 +33,18 @@ public class Constant {
 		{"学习计划","消费者查询"}
 		};
 	
+	public static class productProgressManagerment{
+		public static int groupid = 2;
+		public static int childid = 3;
+		public static String groupString = "生产过程管理";
+		public static String[] grandChildMenu={
+				"生产","勾兑","杀菌","罐装","包装"
+		};
+		public static String[] parentgrandChildMenu={
+			"product","blending","disinfect","canning","packaging"
+		};
+	}
+	
 	public static String[][] parentTableName={
 		{"positive_material_track","positive_report_track","reverse_product_track","reverse_report_track"},
 		{"material_delivery_acceptance","material_incoming_inspection","unqualified_material_treatment","meterial_storage_management"},

@@ -76,7 +76,7 @@ public class AddTableDialog extends Dialog implements android.view.View.OnClickL
 	
 	
 	String editTableName=null;
-	String editRableNameEnglish=null;
+	String editTableNameEnglish=null;
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
@@ -97,8 +97,8 @@ public class AddTableDialog extends Dialog implements android.view.View.OnClickL
 					ToastUtil.s(context, "请填写列名");
 				}else{
 					if(checkTableNameExit()){
-						boolean result=DataBaseOperater.getInstance(context).addTable(name,tableName,editTableName,editRableNameEnglish,columName);
-						Log.i("TraceSystem","name:"+name+",tableName:"+tableName+",editTableName:"+editTableName+",editRableNameEnglish:"+editRableNameEnglish);
+						boolean result=DataBaseOperater.getInstance(context).addTable(name,tableName,editTableName,editTableNameEnglish,columName);
+						Log.i("TraceSystem","name:"+name+",tableName:"+tableName+",editTableName:"+editTableName+",editRableNameEnglish:"+editTableNameEnglish);
 						if(result){
 							ToastUtil.s(context, "创建"+editTableName+"表成功");
 							handler.sendEmptyMessage(1);
@@ -126,7 +126,7 @@ public class AddTableDialog extends Dialog implements android.view.View.OnClickL
 					ToastUtil.s(context, "请添加列名");
 				}else{
 					if(checkTableNameExit()){
-						boolean result=DataBaseOperater.getInstance(context).addTable(name,tableName,editTableName,editRableNameEnglish,columName);
+						boolean result=DataBaseOperater.getInstance(context).addTable(name,tableName,editTableName,editTableNameEnglish,columName);
 						if(result){
 							ToastUtil.s(context, "添加"+editTableName+"成功");
 							handler.sendEmptyMessage(1);
@@ -145,10 +145,10 @@ public class AddTableDialog extends Dialog implements android.view.View.OnClickL
 	}
 	public boolean checkTableNameExit(){
 		editTableName=title_edit.getText().toString();
-		editRableNameEnglish=PinyinUtils.getPingYin(editTableName);
-		editRableNameEnglish=tableName+editRableNameEnglish;
+		editTableNameEnglish=PinyinUtils.getPingYin(editTableName);
+		editTableNameEnglish=tableName+editTableNameEnglish;
 		
-		boolean result=DataBaseOperater.getInstance(context).tableIsExit(editRableNameEnglish);
+		boolean result=DataBaseOperater.getInstance(context).tableIsExit(editTableNameEnglish);
 		if(result){
 			ToastUtil.s(context, "表名已存在，请重新命名");
 			return false;

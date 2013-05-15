@@ -20,6 +20,7 @@ import com.test.tracesystem.activity.CustomInqueryActivity;
 import com.test.tracesystem.activity.LeftMenuActivity;
 import com.test.tracesystem.activity.RightChildActivity;
 import com.test.tracesystem.util.Constant;
+import com.test.tracesystem.util.Constant.productProgressManagerment;
 import com.test.tracesystem.util.LogUtil;
 import com.test.tracesystem.util.ToastUtil;
 
@@ -36,15 +37,22 @@ public class MainActivity extends ActivityGroup {
 			if (msg.what == Constant.FLAG_START_ACTIVITY) {
 				right_view.removeAllViews();
 				Class<?> rightClass;
-				if(msg.arg1 == Constant.parentMenu.length-1 && msg.arg2 == 1){
-					//choose custom inquery option
+				if (msg.arg1 == Constant.parentMenu.length - 1 && msg.arg2 == 1) {
+					// choose custom inquery option
 					rightClass = CustomInqueryActivity.class;
-				}else{
+				} else {
 					rightClass = RightChildActivity.class;
 				}
-				LogUtil.out("aa", "rightClass:"+rightClass.getName());
-				String name = Constant.childMenu[msg.arg1][msg.arg2];
-				String tableName = Constant.parentTableName[msg.arg1][msg.arg2];
+				LogUtil.out("aa", "rightClass:" + rightClass.getName());
+				String name,tableName;
+				if (msg.arg1 == productProgressManagerment.groupid
+						&& msg.arg2 == productProgressManagerment.childid) {
+					name = productProgressManagerment.grandChildMenu[(Integer)msg.obj];
+					tableName = productProgressManagerment.parentgrandChildMenu[(Integer)msg.obj];
+				}else{
+					name = Constant.childMenu[msg.arg1][msg.arg2];
+					tableName = Constant.parentTableName[msg.arg1][msg.arg2];
+				}
 				Intent intent = new Intent(context, rightClass);
 				intent.putExtra("name", name);
 				intent.putExtra("tableName", tableName);
@@ -92,7 +100,7 @@ public class MainActivity extends ActivityGroup {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE); 
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main);
 		context = this;
 		activityManager = getLocalActivityManager();
@@ -101,13 +109,13 @@ public class MainActivity extends ActivityGroup {
 		appcation = (SystemAppcation) getApplication();
 		appcation.setHandler(handler);
 
-	//	client = new OSSClient();
-	//	client.setAccessId("xBHuGeyNMb9Uba0F");
-	//	client.setAccessKey("yDhhTzA8dCUhquv7ub8iI2jNGMX1l4");
-	//	Log.i(TAG, "database path:"
-	//			+ context.getDatabasePath("App.db").exists());
+		// client = new OSSClient();
+		// client.setAccessId("xBHuGeyNMb9Uba0F");
+		// client.setAccessKey("yDhhTzA8dCUhquv7ub8iI2jNGMX1l4");
+		// Log.i(TAG, "database path:"
+		// + context.getDatabasePath("App.db").exists());
 
-	//	uploadalifile();
+		// uploadalifile();
 	}
 
 	public LinearLayout left_view;
