@@ -107,7 +107,7 @@ public class RightChildActivity extends Activity implements OnClickListener {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.title_button:
-			ToastUtil.i(context, "添加批次被点击");
+			ToastUtil.i(context, "添加表单被点击");
 			AddTableDialog dialog = new AddTableDialog(context, name,
 					tableName, handler);
 			dialog.show();
@@ -225,7 +225,7 @@ public class RightChildActivity extends Activity implements OnClickListener {
 				// TODO Auto-generated method stub
 
 				AlertDialog.Builder builder = new AlertDialog.Builder(context);
-				builder.setTitle("确定删除此批次? " + entitys.getChild());
+				builder.setTitle("确定删除此表单? " + entitys.getChild());
 				builder.setPositiveButton("取消", new Dialog.OnClickListener() {
 
 					@Override

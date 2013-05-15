@@ -20,7 +20,6 @@ import com.test.tracesystem.activity.CustomInqueryActivity;
 import com.test.tracesystem.activity.LeftMenuActivity;
 import com.test.tracesystem.activity.RightChildActivity;
 import com.test.tracesystem.util.Constant;
-import com.test.tracesystem.util.Constant.productProgressManagerment;
 import com.test.tracesystem.util.LogUtil;
 import com.test.tracesystem.util.ToastUtil;
 
@@ -45,10 +44,10 @@ public class MainActivity extends ActivityGroup {
 				}
 				LogUtil.out("aa", "rightClass:" + rightClass.getName());
 				String name,tableName;
-				if (msg.arg1 == productProgressManagerment.groupid
-						&& msg.arg2 == productProgressManagerment.childid) {
-					name = productProgressManagerment.grandChildMenu[(Integer)msg.obj];
-					tableName = productProgressManagerment.parentgrandChildMenu[(Integer)msg.obj];
+				int i = Constant.hasGrandChildMenu(msg.arg1, msg.arg2);
+				if (i!=-1) {
+					name = Constant.grandChildMenu.grandChildMenu[i][(Integer)msg.obj];
+					tableName = Constant.grandChildMenu.parentgrandChildMenu[i][(Integer)msg.obj];
 				}else{
 					name = Constant.childMenu[msg.arg1][msg.arg2];
 					tableName = Constant.parentTableName[msg.arg1][msg.arg2];

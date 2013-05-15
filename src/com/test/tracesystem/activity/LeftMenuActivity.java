@@ -85,11 +85,16 @@ public class LeftMenuActivity extends Activity {
 	}
 
 	class GrandchildExpandListAdapter extends BaseExpandableListAdapter {
+		int positon;
+
+		public GrandchildExpandListAdapter(int i) {
+			positon = i;
+		}
 
 		@Override
 		public Object getChild(int groupPosition, int childPosition) {
 			// TODO Auto-generated method stub
-			return Constant.productProgressManagerment.grandChildMenu[childPosition];
+			return Constant.grandChildMenu.grandChildMenu[childPosition];
 		}
 
 		@Override
@@ -103,22 +108,22 @@ public class LeftMenuActivity extends Activity {
 				boolean isLastChild, View convertView, ViewGroup parent) {
 			// TODO Auto-generated method stub
 			// return null;
-			TextView tx = getTextView(40);
+			TextView tx = getTextView(20);
 			// tx.setText(thirdChildString[childPosition]);
-			tx.setText(Constant.productProgressManagerment.grandChildMenu[childPosition]);
+			tx.setText(Constant.grandChildMenu.grandChildMenu[positon][childPosition]);
 			return tx;
 		}
 
 		@Override
 		public int getChildrenCount(int groupPosition) {
 			// TODO Auto-generated method stub
-			return Constant.productProgressManagerment.grandChildMenu.length;
+			return Constant.grandChildMenu.grandChildMenu[positon].length;
 		}
 
 		@Override
 		public Object getGroup(int groupPosition) {
 			// TODO Auto-generated method stub
-			return Constant.productProgressManagerment.groupString;
+			return Constant.grandChildMenu.groupString[positon];
 		}
 
 		@Override
@@ -137,8 +142,8 @@ public class LeftMenuActivity extends Activity {
 		public View getGroupView(int groupPosition, boolean isExpanded,
 				View convertView, ViewGroup parent) {
 			// TODO Auto-generated method stub
-			TextView tx = getTextView(20);
-			tx.setText(Constant.productProgressManagerment.groupString);
+			TextView tx = getTextView(0);
+			tx.setText(Constant.grandChildMenu.groupString[positon]);
 			return tx;
 
 		}
@@ -158,7 +163,6 @@ public class LeftMenuActivity extends Activity {
 	}
 
 	class ExpandListAdapter extends BaseExpandableListAdapter {
-
 		@Override
 		public int getGroupCount() {
 			// TODO Auto-generated method stub
@@ -210,69 +214,79 @@ public class LeftMenuActivity extends Activity {
 			return tx;
 		}
 
+		public ExpandableListView generatingGrandChildMenu(
+				final int grandChildMenuPosition) {
+			final ExpandableListView grandChildView = new ExpandableListView(
+					context);
+			lp = new AbsListView.LayoutParams(
+					ViewGroup.LayoutParams.MATCH_PARENT,
+					ViewGroup.LayoutParams.WRAP_CONTENT);
+
+			GrandChildadapter = new GrandchildExpandListAdapter(
+					grandChildMenuPosition);
+			grandChildView.setLayoutParams(lp);
+			grandChildView.setAdapter(GrandChildadapter);
+
+			grandChildView
+					.setOnGroupExpandListener(new OnGroupExpandListener() {
+						@Override
+						public void onGroupExpand(int groupPosition) {
+							// TODO Auto-generated method stub
+							lp = new AbsListView.LayoutParams(
+									ViewGroup.LayoutParams.MATCH_PARENT,
+									grandChildView.getHeight()
+											* (Constant.grandChildMenu.grandChildMenu[grandChildMenuPosition].length + 1));
+							grandChildView.setLayoutParams(lp);
+						}
+					});
+			grandChildView
+					.setOnGroupCollapseListener(new OnGroupCollapseListener() {
+						@Override
+						public void onGroupCollapse(int groupPosition) {
+							// TODO Auto-generated method stub
+							lp = new AbsListView.LayoutParams(
+									ViewGroup.LayoutParams.MATCH_PARENT,
+									ViewGroup.LayoutParams.WRAP_CONTENT);
+							grandChildView.setLayoutParams(lp);
+						}
+
+					});
+			grandChildView.setOnChildClickListener(new OnChildClickListener() {
+				@Override
+				public boolean onChildClick(ExpandableListView parent, View v,
+						int groupPosition, int childPosition, long id) {
+					// TODO Auto-generated method stub
+					Message msg = new Message();
+					msg.what = Constant.FLAG_START_ACTIVITY;
+					msg.arg1 = Constant.grandChildMenu.groupid[grandChildMenuPosition];
+					msg.arg2 = Constant.grandChildMenu.childid[grandChildMenuPosition];
+					msg.obj = childPosition;
+					LogUtil.out("aa",
+							"temp.setOnChildClickListener childPositon:"
+									+ childPosition);
+					SystemAppcation.getHandler().sendMessage(msg);
+
+					return false;
+				}
+
+			});
+			grandChildView.setPadding(76, 0, 0, 0);
+			
+			return grandChildView;
+		}
+
 		@Override
 		public View getChildView(int groupPosition, int childPosition,
 				boolean isLastChild, View convertView, ViewGroup parent) {
 			// TODO Auto-generated method stub
-			if (groupPosition == Constant.productProgressManagerment.groupid
-					&& childPosition == Constant.productProgressManagerment.childid) {
-				final ExpandableListView temp = new ExpandableListView(context);
-				lp = new AbsListView.LayoutParams(
-						ViewGroup.LayoutParams.MATCH_PARENT,
-						ViewGroup.LayoutParams.WRAP_CONTENT);
-
-				GrandChildadapter = new GrandchildExpandListAdapter();
-				temp.setLayoutParams(lp);
-				temp.setAdapter(GrandChildadapter);
-
-				temp.setOnGroupExpandListener(new OnGroupExpandListener() {
-					@Override
-					public void onGroupExpand(int groupPosition) {
-						// TODO Auto-generated method stub
-						lp = new AbsListView.LayoutParams(
-								ViewGroup.LayoutParams.MATCH_PARENT,
-								temp.getHeight()
-										* (Constant.productProgressManagerment.grandChildMenu.length + 1));
-						temp.setLayoutParams(lp);
-					}
-				});
-				temp.setOnGroupCollapseListener(new OnGroupCollapseListener() {
-					@Override
-					public void onGroupCollapse(int groupPosition) {
-						// TODO Auto-generated method stub
-						lp = new AbsListView.LayoutParams(
-								ViewGroup.LayoutParams.MATCH_PARENT,
-								ViewGroup.LayoutParams.WRAP_CONTENT);
-						temp.setLayoutParams(lp);
-					}
-
-				});
-				temp.setOnChildClickListener(new OnChildClickListener() {
-					@Override
-					public boolean onChildClick(ExpandableListView parent,
-							View v, int groupPosition, int childPosition,
-							long id) {
-						// TODO Auto-generated method stub
-						Message msg = new Message();
-						msg.what = Constant.FLAG_START_ACTIVITY;
-						msg.arg1 = Constant.productProgressManagerment.groupid;
-						msg.arg2 = Constant.productProgressManagerment.childid;
-						msg.obj = childPosition;
-						LogUtil.out("aa",
-								"temp.setOnChildClickListener childPositon:"
-										+ childPosition);
-						SystemAppcation.getHandler().sendMessage(msg);
-
-						return false;
-					}
-
-				});
-				return temp;
-
+			int i = Constant.hasGrandChildMenu(groupPosition, childPosition);
+			if (i != -1) {
+				return generatingGrandChildMenu(i);
+			} else {
+				TextView tx = getTextView(20);
+				tx.setText(childString[groupPosition][childPosition]);
+				return tx;
 			}
-			TextView tx = getTextView(20);
-			tx.setText(childString[groupPosition][childPosition]);
-			return tx;
 		}
 
 		@Override
