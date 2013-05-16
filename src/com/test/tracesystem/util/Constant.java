@@ -25,11 +25,11 @@ public class Constant {
 	public static String[][] childMenu = {
 			{ "正向原料跟踪", "正向跟踪报表", "反向产品溯源", "反向溯源报表" },
 			{ "物料到货验收", "物料到货检验", "不合格物料处理", "物料入库管理" },
-			{ "生产计划管理", "物料领料出库", "配料投料管理", "生产过程管理", "产品留样管理", "产品批次检验","产品入库管理" },
+			{ "生产计划管理", "物料领料出库", "配料投料管理", "生产过程管理", "产品留样管理", "产品批次检验","产品入库管理","不合格产品销毁记录" },
 			{ "产品发货管理", "产品退货管理", "产品召回管理", "不合格产品处理" },
 			{ "物料入库统计", "物料存货总览", "产品出库统计", "产品库存总览" },
 			{ "物料检测模板", "产品基础信息", "检测指标管理", "委托出厂检验登记表", "客户资料管理", "供应商资料管理","国家标准文件" },
-			{ "学习计划", "消费者查询" } 
+			{ "学习计划","从业人员健康管理","消费者查询" } 
 	};
 	public static int hasGrandChildMenu(int groupPosition, int childPosition) {
 		for (int i = 0; i < Constant.grandChildMenu.groupid.length; i++) {
@@ -65,8 +65,8 @@ public class Constant {
 	}
 
 	public static String[][] parentTableName = {
-			{ "positive_material_track", "positive_report_track",
-					"reverse_product_track", "reverse_report_track" },
+			{ "positive_material_track", "positive_report_track","reverse_product_track", 
+				"reverse_report_track" },
 			{ "material_delivery_acceptance", "material_incoming_inspection",
 					"unqualified_material_treatment",
 					"meterial_storage_management" },
@@ -74,7 +74,7 @@ public class Constant {
 					"batch_feeding_management",
 					"production_process_management",
 					"retention_samples_management", "batch_test",
-					"products_storage_management" },
+					"products_storage_management","unqualified_products_destroy_record" },
 			{ "product_delivery_management", "product_return_management",
 					"product_recall_management", "product_unqualified_process" },
 			{ "material_storage_statistics", "meterial_inventory",
@@ -84,7 +84,7 @@ public class Constant {
 					"product_detection_template",
 					"customer_information_management",
 					"supplier_information_management", "national_standard_file" },
-			{ "learning_plan", "consumer_inquiries" } };
+			{ "learning_plan", "empoyer_health_managerment","consumer_inquiries" } };
 
 	/***
 	 * 右侧设置启动activity的flag

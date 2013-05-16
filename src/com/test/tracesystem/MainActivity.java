@@ -36,7 +36,7 @@ public class MainActivity extends ActivityGroup {
 			if (msg.what == Constant.FLAG_START_ACTIVITY) {
 				right_view.removeAllViews();
 				Class<?> rightClass;
-				if (msg.arg1 == Constant.parentMenu.length - 1 && msg.arg2 == 1) {
+				if (msg.arg1 == Constant.parentMenu.length - 1 && msg.arg2 == 2) {
 					// choose custom inquery option
 					rightClass = CustomInqueryActivity.class;
 				} else {
