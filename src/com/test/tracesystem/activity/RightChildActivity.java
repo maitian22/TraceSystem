@@ -31,9 +31,12 @@ import com.test.tracesystem.adapter.RightChildAdapter.TableRow;
 import com.test.tracesystem.database.DataBaseOperater;
 import com.test.tracesystem.dialog.AddAndUpdateChildDialog;
 import com.test.tracesystem.dialog.AddTableDialog;
+import com.test.tracesystem.dialog.SepcialAddTableDialog;
 import com.test.tracesystem.entity.TotalTableEntity;
+import com.test.tracesystem.util.Constant;
 import com.test.tracesystem.util.LogUtil;
 import com.test.tracesystem.util.ToastUtil;
+
 
 public class RightChildActivity extends Activity implements OnClickListener {
 
@@ -108,9 +111,15 @@ public class RightChildActivity extends Activity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.title_button:
 			ToastUtil.i(context, "添加表单被点击");
-			AddTableDialog dialog = new AddTableDialog(context, name,
+			int xmlId = Constant.hasSpecialAddTableDialog(name);
+		if(xmlId!=-1){
+				SepcialAddTableDialog spDialog = new SepcialAddTableDialog(context,name,tableName,xmlId,handler);
+				spDialog.show();
+			}else{
+				AddTableDialog dialog = new AddTableDialog(context, name,
 					tableName, handler);
-			dialog.show();
+				dialog.show();
+			}
 			break;
 		}
 	}
@@ -152,6 +161,7 @@ public class RightChildActivity extends Activity implements OnClickListener {
 
 			application.dismissProgressDialog();
 			if (flag) {
+				add_btn.setEnabled(false);
 				if (listData != null) {
 					tableLinearLayout.removeAllViews();
 					for (int i = 0; i < listData.size(); i++) {
@@ -161,6 +171,10 @@ public class RightChildActivity extends Activity implements OnClickListener {
 
 				}
 
+			}
+			else{
+				tableLinearLayout.removeAllViews();
+				add_btn.setEnabled(true);
 			}
 
 		}
@@ -192,8 +206,7 @@ public class RightChildActivity extends Activity implements OnClickListener {
 							(int) (width * 0.3), TableCell.STRING);
 				} else if (i != 0 && j == 0) {
 					titles[j] = new TableCell(
-							"" + (Integer.valueOf(entity[j].toString()
-											.trim()) - 1), width,
+							"" + i, width,
 							(int) (width * 0.3), TableCell.STRING);
 				} else {
 					// LogUtil.out("aa","entity[j]:"+Integer.valueOf(entity[j].toString().trim()));
@@ -210,7 +223,7 @@ public class RightChildActivity extends Activity implements OnClickListener {
 		lv.setLayoutParams(new FrameLayout.LayoutParams(-1,
 				(int) ((width * 0.32) * data.size()+1)));
 
-		TextView tx = (TextView) v.findViewById(R.id.title_text);
+	//	TextView tx = (TextView) v.findViewById(R.id.title_text);
 		Button btnDel = (Button) v.findViewById(R.id.del_button);
 		Button btnAdd = (Button) v.findViewById(R.id.title_button);
 		

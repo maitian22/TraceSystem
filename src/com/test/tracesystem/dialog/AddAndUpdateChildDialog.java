@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -76,7 +77,7 @@ public class AddAndUpdateChildDialog extends Dialog implements
 	public void initView() {
 		title_text = (TextView) findViewById(R.id.title_text);
 		title2_text = (TextView) findViewById(R.id.title2_text);
-		title_text.setText(entitys.getName() + "(" + entitys.getChild() + ")");
+		title_text.setText(entitys.getChild());
 		if (type.equals("insert")) {
 			title2_text.setText("添加数据");
 		} else if (type.equals("updata")) {
@@ -146,19 +147,37 @@ public class AddAndUpdateChildDialog extends Dialog implements
 		
 		for (int i = 1; i < dataTitle.length - 1; i++) {
 			View view = inflater.inflate(R.layout.add_table_dialog_item, null);
-
+	        
 			EditText edit = (EditText) view.findViewById(R.id.item_edit);
 			TextView text = (TextView) view.findViewById(R.id.item_text);
-
+			
 			edit.setHint("不能为空");
 			if (type.equals("insert")) {
 				edit.setText("");
 			} else if (type.equals("updata")) {
 				edit.setText(data[i]);
 			}
-			text.setText(dataTitle[i]);
+			text.setText(dataTitle[i]+":");
 			text = null;
 			listEdit.add(edit);
+			
+			EditText edit1 = (EditText) view.findViewById(R.id.item_edit1);
+			TextView text1 = (TextView) view.findViewById(R.id.item_text1);
+			if(i+1<dataTitle.length){
+				edit1.setHint("不能为空");
+				if(type.equals("insert")){
+					edit1.setText("");
+				}else if(type.equals("updata")){
+					edit1.setText(data[i+1]);
+				}
+				text1.setText(dataTitle[i+1]+":");
+				text = null;
+				listEdit.add(edit1);
+				i++;
+			}else{
+				edit1.setVisibility(android.view.View.GONE);
+				text1.setVisibility(android.view.View.GONE);
+			}
 			addlinear_view.addView(view);
 		}
 	}

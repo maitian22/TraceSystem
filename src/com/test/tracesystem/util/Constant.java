@@ -1,5 +1,7 @@
 package com.test.tracesystem.util;
 
+import com.test.tracesystem.R;
+
 public class Constant {
 
 	/***
@@ -39,6 +41,21 @@ public class Constant {
 			}
 		}
 		return -1;
+	}
+	
+	public static int hasSpecialAddTableDialog(String name){
+		for(int i = 0;i<specialAddTableDialog.ChildMenu.length;i++)
+			if(name.equals(specialAddTableDialog.ChildMenu[i]))
+				return specialAddTableDialog.xmlid[i];
+		return -1;
+	}
+	
+	public static class specialAddTableDialog{
+		public static String[] ChildMenu={"物料到货验收"};
+		public static int[] xmlid={R.layout.product_check_out};
+	//	public static specialxml[] xml= {
+			//{"物料到货验收",product_check_out}
+	//		};
 	}
 	
 	public static class grandChildMenu{

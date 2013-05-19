@@ -1,0 +1,263 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/blue"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/titleView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/box_1"
+        android:gravity="center"
+        android:text="采购物质检验/验证结果通知单"
+        android:textColor="@color/black"
+        android:textSize="20dp" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titleView"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/mText0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="产品名称："
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+
+        <EditText
+            android:id="@+id/mEditText0"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/mText1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="生产单位："
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+
+        <EditText
+            android:id="@+id/mEditText1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/mText2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="规格型号："
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+
+        <EditText
+            android:id="@+id/mEditText2"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/mText3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="批次（生产日期）："
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+
+        <EditText
+            android:id="@+id/mEditText4"
+            android:layout_width="200dip"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/mText5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="到货数量："
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+
+        <EditText
+            android:id="@+id/mEditText5"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/mText6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1.产品合格证明文件验证情况："
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+
+        <EditText
+            android:id="@+id/mEditText6"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/mText7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="检验人员："
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+
+        <EditText
+            android:id="@+id/mEditText7"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/mText8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="日期："
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+
+        <EditText
+            android:id="@+id/mEditText8"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/mText9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2.检验项目及检验结果："
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+
+        <EditText
+            android:id="@+id/mEditText9"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/mText10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="检验人员："
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+
+        <EditText
+            android:id="@+id/mEditText10"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/mText11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="日期："
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+
+        <EditText
+            android:id="@+id/mEditText11"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/mText12"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="判定:(1.合格同意入库 2.不合格（建议：退货或让步接收）)"
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+
+        <EditText
+            android:id="@+id/mEditText12"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/mText13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="质量负责人批准："
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+
+        <EditText
+            android:id="@+id/mEditText13"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/mText14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="日期："
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+
+        <EditText
+            android:id="@+id/mEditText14"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</LinearLayout>

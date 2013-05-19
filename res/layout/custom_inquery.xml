@@ -23,7 +23,7 @@
             android:id="@+id/mInputNum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="请输入产品批次号" />
+            android:hint="请输入表名" />
         <Button
             android:id="@+id/mSearch"
             android:layout_width="wrap_content"

@@ -174,6 +174,19 @@ public class AddTableDialog extends Dialog implements android.view.View.OnClickL
 			showText=null;
 			text=null;
 			listEdit.add(edit);
+			
+			EditText edit1 = (EditText) view.findViewById(R.id.item_edit1);
+			TextView text1 = (TextView) view.findViewById(R.id.item_text1);
+			if(i+1<MAX_RORM_RANG){
+				edit1.setHint("第"+(i+2)+"列列名");
+				text1.setText("第"+(i+2)+"列列名");
+				listEdit.add(edit1);
+				i++;
+			}else{
+				edit1.setVisibility(android.view.View.GONE);
+				text1.setVisibility(android.view.View.GONE);
+			}
+			
 			addlinear_view.addView(view);
 		}
 	}
